@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\BorrowingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FineController;
@@ -27,5 +28,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/fines', [FineController::class, 'index'])->name('fines.index');
         Route::patch('/fines/{fine}/pay', [FineController::class, 'markAsPaid'])->name('fines.pay');
+
+        Route::get('/borrowings', [BorrowingController::class, 'index'])->name('borrowings.index');
+        Route::patch('/borrowings/{borrowing}/return', [BorrowingController::class, 'markAsReturned'])->name('borrowings.return');
     });
 });
