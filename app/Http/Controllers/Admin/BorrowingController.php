@@ -6,14 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Borrowing;
 use App\Models\Fine;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class BorrowingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $borrowings = Borrowing::with(['user', 'book'])
-            ->latest()
-            ->paginate(10);
+        $query = Borrowing::with(['user', 'book'])->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->whereHas('user', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                })->orWhereHas('book', function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%");
+                });
+            });
+        }
+
+        $borrowings = $query->paginate(10)->withQueryString();
 
         return view('admin.borrowings.index', compact('borrowings'));
     }

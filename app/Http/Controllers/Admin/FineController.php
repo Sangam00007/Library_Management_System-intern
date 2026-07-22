@@ -4,14 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fine;
+use Illuminate\Http\Request;
 
 class FineController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $fines = Fine::with(['user', 'borrowing.book'])
-            ->latest()
-            ->paginate(10);
+        $query = Fine::with(['user', 'borrowing.book'])->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $fines = $query->paginate(10)->withQueryString();
 
         return view('admin.fines.index', compact('fines'));
     }
