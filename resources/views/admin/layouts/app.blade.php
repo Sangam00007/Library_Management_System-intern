@@ -9,14 +9,17 @@
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-slate-50 font-sans antialiased text-slate-900 flex min-h-screen overflow-hidden selection:bg-amber-500/30 selection:text-amber-900">
+<body class="bg-slate-50 font-sans antialiased text-slate-900 flex min-h-screen overflow-hidden selection:bg-amber-500/30 selection:text-amber-900" x-data="{ sidebarOpen: false }">
     
     <!-- Background Decorators -->
     <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-20 pointer-events-none"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-slate-300 rounded-full mix-blend-multiply filter blur-[120px] opacity-20 pointer-events-none" style="animation-delay: 2s;"></div>
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-slate-800 backdrop-blur-xl border-r border-slate-700/50 flex flex-col transition-all duration-300 relative z-20">
+    <aside 
+        class="w-64 bg-slate-800 backdrop-blur-xl border-r border-slate-700/50 flex flex-col transition-transform duration-300 z-40 fixed inset-y-0 left-0 lg:static lg:translate-x-0"
+        :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+    >
         <div class="h-16 flex items-center px-6 border-b border-slate-700/50">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
@@ -68,12 +71,26 @@
         </nav>
     </aside>
 
+    <!-- Mobile Sidebar Backdrop -->
+    <div 
+        x-show="sidebarOpen" 
+        @click="sidebarOpen = false" 
+        class="fixed inset-0 bg-slate-900/50 z-30 lg:hidden"
+        x-transition:enter="transition-opacity ease-linear duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition-opacity ease-linear duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        style="display: none;"
+    ></div>
+
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-screen relative z-10">
         <!-- Topbar -->
         <header class="h-16 bg-white backdrop-blur-xl border-b border-slate-200 flex items-center justify-between px-6 sticky top-0 z-30">
             <div class="flex items-center gap-4">
-                <button class="text-slate-500 hover:text-slate-900 lg:hidden transition-colors">
+                <button @click="sidebarOpen = true" class="text-slate-500 hover:text-slate-900 lg:hidden transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
                 <div class="relative hidden sm:block">
