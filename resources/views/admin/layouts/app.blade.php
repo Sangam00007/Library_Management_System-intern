@@ -66,8 +66,7 @@
                 <span class="font-medium text-sm">Fines</span>
             </a>
         </nav>
-
-
+    </aside>
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-screen relative z-10">
