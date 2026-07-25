@@ -57,7 +57,7 @@
                     </thead>
                     <tbody class="divide-y divide-slate-200 text-slate-600">
                         @foreach($categories as $category)
-                        <tr class="hover:bg-slate-50 transition-colors">
+                        <tr class="even:bg-slate-50 hover:bg-slate-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/20">

@@ -186,7 +186,7 @@
                     </thead>
                     <tbody class="divide-y divide-slate-200 text-slate-600">
                         @foreach($recentBorrowings as $borrowing)
-                        <tr class="hover:bg-slate-50 transition-colors">
+                        <tr class="even:bg-slate-50 hover:bg-slate-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-10 bg-slate-100 rounded shadow flex items-center justify-center flex-shrink-0">

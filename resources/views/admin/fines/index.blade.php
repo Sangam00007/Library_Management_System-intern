@@ -51,7 +51,7 @@
                     </thead>
                     <tbody class="divide-y divide-slate-200 text-slate-600">
                         @foreach($fines as $fine)
-                        <tr class="hover:bg-slate-50 transition-colors">
+                        <tr class="even:bg-slate-50 hover:bg-slate-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="font-medium text-slate-900">{{ $fine->user?->name }}</div>
                                 <div class="text-xs text-slate-500">{{ $fine->user?->email }}</div>

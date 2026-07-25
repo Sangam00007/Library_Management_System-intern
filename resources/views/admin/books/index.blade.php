@@ -60,7 +60,7 @@
                     </thead>
                     <tbody class="divide-y divide-slate-200 text-slate-600">
                         @foreach($books as $book)
-                        <tr class="hover:bg-slate-50 transition-colors">
+                        <tr class="even:bg-slate-50 hover:bg-slate-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     @if($book->cover_image)
