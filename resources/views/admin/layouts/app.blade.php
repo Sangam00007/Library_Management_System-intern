@@ -67,13 +67,7 @@
             </a>
         </nav>
 
-        <div class="p-4 border-t border-slate-700/50">
-            <div class="bg-gradient-to-r from-amber-900/50 to-slate-900/50 rounded-lg p-4 border border-amber-500/20">
-                <p class="text-xs text-amber-200 mb-2">Need help?</p>
-                <a href="#" class="text-sm font-medium text-white hover:text-amber-300 transition-colors">Check documentation &rarr;</a>
-            </div>
-        </div>
-    </aside>
+
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-screen relative z-10">
@@ -92,10 +86,6 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <button class="relative p-2 text-slate-400 hover:text-white transition-colors rounded-full hover:bg-slate-700/50">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                    <span class="absolute top-1.5 right-1.5 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-slate-800"></span>
-                </button>
 
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" @click.away="open = false" class="flex items-center gap-2 focus:outline-none">
@@ -108,8 +98,6 @@
                         <div class="px-4 py-2 border-b border-slate-700/50">
                             <p class="text-sm text-slate-900 truncate">{{ auth('admin')->user()->email ?? 'admin@example.com' }}</p>
                         </div>
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-amber-600 transition-colors">Profile</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-amber-600 transition-colors">Settings</a>
                         <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf
                             <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors">
