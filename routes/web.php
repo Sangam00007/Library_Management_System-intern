@@ -8,12 +8,30 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FineController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// User Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
+    Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
+});
+
+Route::post('/logout', [UserAuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('user.dashboard');
+    })->name('user.dashboard');
+});
+
+// Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
