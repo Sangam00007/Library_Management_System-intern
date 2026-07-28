@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\FineController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\UserDashboardController;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
@@ -35,9 +36,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [UserAuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('user.dashboard');
-    })->name('user.dashboard');
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
 });
 
 // Admin Routes
