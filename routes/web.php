@@ -9,10 +9,19 @@ use App\Http\Controllers\Admin\FineController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\UserAuthController;
+use App\Models\Author;
+use App\Models\Book;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'totalBooks' => Book::count(),
+        'totalMembers' => User::count(),
+        'totalCategories' => Category::count(),
+        'totalAuthors' => Author::count(),
+    ]);
 });
 
 // User Authentication Routes
