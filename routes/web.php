@@ -37,6 +37,7 @@ Route::post('/logout', [UserAuthController::class, 'logout'])->middleware('auth'
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/books', [\App\Http\Controllers\UserBookController::class, 'index'])->name('user.books.index');
 });
 
 // Admin Routes
