@@ -50,8 +50,8 @@
                     <!-- Desktop Nav Links -->
                     <div class="hidden md:flex items-center space-x-2">
                         <a href="{{ route('user.dashboard') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-semibold text-sm transition-colors">Dashboard</a>
-                        <a href="{{ route('user.books.index') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.books.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-medium text-sm transition-colors">Explore Books</a>
-                        <a href="#" class="px-4 py-2 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 font-medium text-sm transition-colors">My Borrowings</a>
+                        <a href="{{ route('user.books.index') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.books.index') || request()->routeIs('user.books.show') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-medium text-sm transition-colors">Explore Books</a>
+                        <a href="{{ route('user.borrowings.index') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.borrowings.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-medium text-sm transition-colors">My Borrowings</a>
                     </div>
                 </div>
 
@@ -117,8 +117,8 @@
         <div x-show="mobileMenuOpen" style="display: none;" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden bg-white/95 backdrop-blur-md border-b border-slate-100 absolute w-full shadow-lg z-40">
             <div class="px-4 pt-2 pb-6 space-y-1">
                 <a href="{{ route('user.dashboard') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-semibold text-base">Dashboard</a>
-                <a href="{{ route('user.books.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.books.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">Explore Books</a>
-                <a href="#" class="block px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-base">My Borrowings</a>
+                <a href="{{ route('user.books.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.books.index') || request()->routeIs('user.books.show') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">Explore Books</a>
+                <a href="{{ route('user.borrowings.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.borrowings.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">My Borrowings</a>
                 <div class="border-t border-slate-100 my-2 pt-2">
                     <a href="#" class="flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-base">
                         <span>Notifications</span>
