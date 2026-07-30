@@ -3,12 +3,16 @@
 use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\BorrowingController;
+use App\Http\Controllers\Admin\BorrowRequestController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FineController;
 use App\Http\Controllers\Admin\PublisherController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\UserBookController;
+use App\Http\Controllers\UserBorrowingController;
+use App\Http\Controllers\UserBorrowRequestController;
 use App\Http\Controllers\UserDashboardController;
 use App\Models\Author;
 use App\Models\Book;
@@ -37,7 +41,10 @@ Route::post('/logout', [UserAuthController::class, 'logout'])->middleware('auth'
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
-    Route::get('/books', [\App\Http\Controllers\UserBookController::class, 'index'])->name('user.books.index');
+    Route::get('/books', [UserBookController::class, 'index'])->name('user.books.index');
+    Route::get('/books/{book}', [UserBookController::class, 'show'])->name('user.books.show');
+    Route::post('/books/{book}/request', [UserBorrowRequestController::class, 'store'])->name('user.books.request');
+    Route::get('/my-borrowings', [UserBorrowingController::class, 'index'])->name('user.borrowings.index');
 });
 
 // Admin Routes
@@ -55,6 +62,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/fines', [FineController::class, 'index'])->name('fines.index');
         Route::patch('/fines/{fine}/pay', [FineController::class, 'markAsPaid'])->name('fines.pay');
+
+        Route::get('/borrow-requests', [BorrowRequestController::class, 'index'])->name('borrow_requests.index');
+        Route::patch('/borrow-requests/{borrowRequest}/approve', [BorrowRequestController::class, 'approve'])->name('borrow_requests.approve');
+        Route::patch('/borrow-requests/{borrowRequest}/reject', [BorrowRequestController::class, 'reject'])->name('borrow_requests.reject');
 
         Route::get('/borrowings', [BorrowingController::class, 'index'])->name('borrowings.index');
         Route::patch('/borrowings/{borrowing}/return', [BorrowingController::class, 'markAsReturned'])->name('borrowings.return');

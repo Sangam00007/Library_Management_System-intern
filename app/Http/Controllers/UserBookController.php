@@ -29,4 +29,10 @@ class UserBookController extends Controller
 
         return view('user.books.index', compact('books', 'categories'));
     }
+
+    public function show(Book $book)
+    {
+        $book->load(['author', 'category']);
+        return view('user.books.show', compact('book'));
+    }
 }

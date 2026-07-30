@@ -68,7 +68,7 @@
         @if($books->count() > 0)
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                 @foreach($books as $book)
-                    <div class="bg-white rounded-3xl border border-slate-100 p-3 sm:p-4 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full cursor-pointer relative overflow-hidden">
+                    <a href="{{ route('user.books.show', $book) }}" class="bg-white rounded-3xl border border-slate-100 p-3 sm:p-4 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full cursor-pointer relative overflow-hidden">
                         
                         <!-- Book Cover -->
                         <div class="w-full aspect-[2/3] bg-slate-50 rounded-2xl mb-4 overflow-hidden shadow-inner relative group-hover:shadow-md transition-all">
@@ -113,7 +113,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 
