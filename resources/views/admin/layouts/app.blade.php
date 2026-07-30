@@ -60,6 +60,14 @@
                 <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Circulation</p>
             </div>
             
+            <a href="{{ route('admin.borrow_requests.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('admin.borrow_requests.*') ? 'bg-amber-500/20 text-amber-500' : 'text-slate-400 hover:text-white hover:bg-slate-700/50' }} transition-all duration-200 group">
+                <svg class="w-5 h-5 {{ request()->routeIs('admin.borrow_requests.*') ? 'text-amber-500' : 'text-slate-500 group-hover:text-slate-300' }} transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                <span class="font-medium text-sm">Borrow Requests</span>
+                @php $pendingCount = \App\Models\BorrowRequest::where('status', 'pending')->count(); @endphp
+                @if($pendingCount > 0)
+                    <span class="ml-auto bg-amber-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ $pendingCount }}</span>
+                @endif
+            </a>
             <a href="{{ route('admin.borrowings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('admin.borrowings.*') ? 'bg-amber-500/20 text-amber-500' : 'text-slate-400 hover:text-white hover:bg-slate-700/50' }} transition-all duration-200 group">
                 <svg class="w-5 h-5 {{ request()->routeIs('admin.borrowings.*') ? 'text-amber-500' : 'text-slate-500 group-hover:text-slate-300' }} transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
                 <span class="font-medium text-sm">Borrowings</span>
