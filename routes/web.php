@@ -14,6 +14,7 @@ use App\Http\Controllers\UserBookController;
 use App\Http\Controllers\UserBorrowingController;
 use App\Http\Controllers\UserBorrowRequestController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\UserProfileController;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
@@ -45,6 +46,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/{book}', [UserBookController::class, 'show'])->name('user.books.show');
     Route::post('/books/{book}/request', [UserBorrowRequestController::class, 'store'])->name('user.books.request');
     Route::get('/my-borrowings', [UserBorrowingController::class, 'index'])->name('user.borrowings.index');
+
+    // Profile Routes
+    Route::get('/profile', [UserProfileController::class, 'edit'])->name('user.profile.edit');
+    Route::patch('/profile', [UserProfileController::class, 'update'])->name('user.profile.update');
+    Route::patch('/profile/password', [UserProfileController::class, 'updatePassword'])->name('user.password.update');
 });
 
 // Admin Routes
