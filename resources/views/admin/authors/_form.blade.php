@@ -6,7 +6,7 @@
         <div>
             <label for="name" class="block text-sm font-medium text-slate-600 mb-1.5">Name <span class="text-red-600">*</span></label>
             <input type="text" name="name" id="name" value="{{ old('name', $author->name ?? '') }}" required
-                class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="e.g. J.K. Rowling">
+                class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="e.g. J.K. Rowling">
             @error('name')
                 <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
             @enderror
@@ -16,7 +16,7 @@
         <div>
             <label for="bio" class="block text-sm font-medium text-slate-600 mb-1.5">Bio</label>
             <textarea name="bio" id="bio" rows="4"
-                class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all resize-none" placeholder="Brief biography of this author">{{ old('bio', $author->bio ?? '') }}</textarea>
+                class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all resize-none" placeholder="Brief biography of this author">{{ old('bio', $author->bio ?? '') }}</textarea>
             @error('bio')
                 <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
             @enderror

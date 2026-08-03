@@ -8,7 +8,7 @@
             <div>
                 <label for="title" class="block text-sm font-medium text-slate-600 mb-1.5">Title <span class="text-red-600">*</span></label>
                 <input type="text" name="title" id="title" value="{{ old('title', $book->title ?? '') }}" required
-                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="Enter book title">
+                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="Enter book title">
                 @error('title')
                     <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -18,7 +18,7 @@
             <div>
                 <label for="isbn" class="block text-sm font-medium text-slate-600 mb-1.5">ISBN</label>
                 <input type="text" name="isbn" id="isbn" value="{{ old('isbn', $book->isbn ?? '') }}"
-                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="e.g. 978-0743273565">
+                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="e.g. 978-0743273565">
                 @error('isbn')
                     <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -28,7 +28,7 @@
             <div>
                 <label for="description" class="block text-sm font-medium text-slate-600 mb-1.5">Description</label>
                 <textarea name="description" id="description" rows="4"
-                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all resize-none" placeholder="Brief description of the book">{{ old('description', $book->description ?? '') }}</textarea>
+                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all resize-none" placeholder="Brief description of the book">{{ old('description', $book->description ?? '') }}</textarea>
                 @error('description')
                     <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -39,7 +39,7 @@
                 <div>
                     <label for="published_year" class="block text-sm font-medium text-slate-600 mb-1.5">Published Year</label>
                     <input type="number" name="published_year" id="published_year" value="{{ old('published_year', $book->published_year ?? '') }}" min="1000" max="{{ date('Y') }}"
-                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="e.g. 2024">
+                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="e.g. 2024">
                     @error('published_year')
                         <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -47,7 +47,7 @@
                 <div>
                     <label for="language" class="block text-sm font-medium text-slate-600 mb-1.5">Language <span class="text-red-600">*</span></label>
                     <select name="language" id="language"
-                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
+                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
                         @php
                             $languages = ['English', 'Spanish', 'French', 'German', 'Chinese', 'Japanese', 'Korean', 'Hindi', 'Nepali', 'Arabic', 'Portuguese', 'Russian', 'Italian', 'Dutch', 'Other'];
                             $selectedLang = old('language', $book->language ?? 'English');
@@ -67,7 +67,7 @@
                 <div>
                     <label for="total_copies" class="block text-sm font-medium text-slate-600 mb-1.5">Total Copies <span class="text-red-600">*</span></label>
                     <input type="number" name="total_copies" id="total_copies" value="{{ old('total_copies', $book->total_copies ?? 1) }}" min="0" required
-                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="0">
+                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="0">
                     @error('total_copies')
                         <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -75,7 +75,7 @@
                 <div>
                     <label for="available_copies" class="block text-sm font-medium text-slate-600 mb-1.5">Available Copies <span class="text-red-600">*</span></label>
                     <input type="number" name="available_copies" id="available_copies" value="{{ old('available_copies', $book->available_copies ?? 1) }}" min="0" required
-                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="0">
+                        class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all" placeholder="0">
                     @error('available_copies')
                         <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -94,7 +94,7 @@
             <div>
                 <label for="category_id" class="block text-sm font-medium text-slate-600 mb-1.5">Category</label>
                 <select name="category_id" id="category_id"
-                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
+                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
                     <option value="">— Select Category —</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}" {{ old('category_id', $book->category_id ?? '') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -109,7 +109,7 @@
             <div>
                 <label for="author_id" class="block text-sm font-medium text-slate-600 mb-1.5">Author</label>
                 <select name="author_id" id="author_id"
-                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
+                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
                     <option value="">— Select Author —</option>
                     @foreach($authors as $author)
                         <option value="{{ $author->id }}" {{ old('author_id', $book->author_id ?? '') == $author->id ? 'selected' : '' }}>{{ $author->name }}</option>
@@ -124,7 +124,7 @@
             <div>
                 <label for="publisher_id" class="block text-sm font-medium text-slate-600 mb-1.5">Publisher</label>
                 <select name="publisher_id" id="publisher_id"
-                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
+                    class="block w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all">
                     <option value="">— Select Publisher —</option>
                     @foreach($publishers as $publisher)
                         <option value="{{ $publisher->id }}" {{ old('publisher_id', $book->publisher_id ?? '') == $publisher->id ? 'selected' : '' }}>{{ $publisher->name }}</option>

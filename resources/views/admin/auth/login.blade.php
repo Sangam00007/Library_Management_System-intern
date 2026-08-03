@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
 </head>
-<body class="bg-slate-50 font-sans antialiased text-gray-100 flex items-center justify-center min-h-screen relative overflow-hidden">
+<body class="bg-slate-50 font-sans antialiased text-slate-900 flex items-center justify-center min-h-screen relative overflow-hidden">
     
     <!-- Background Decorators -->
     <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-pulse"></div>
