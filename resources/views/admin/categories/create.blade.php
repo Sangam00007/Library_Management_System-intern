@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form method="POST" action="{{ route('admin.categories.store') }}">
+    <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
         @csrf
         @include('admin.categories._form')
     </form>
