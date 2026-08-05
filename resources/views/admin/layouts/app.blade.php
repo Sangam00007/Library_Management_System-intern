@@ -155,6 +155,38 @@
         </div>
     </main>
 
+    <!-- Global Delete Confirmation Modal -->
+    <div x-data="{ showDeleteModal: false, deleteAction: '', itemName: '' }" 
+         @open-delete-modal.window="showDeleteModal = true; deleteAction = $event.detail.action; itemName = $event.detail.name">
+        <!-- Modal Backdrop -->
+        <div x-show="showDeleteModal" style="display: none;" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[60] transition-opacity"
+             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+        
+        <!-- Modal Content -->
+        <div x-show="showDeleteModal" style="display: none;" class="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-0"
+             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden w-full max-w-md transform transition-all" @click.away="showDeleteModal = false">
+                <div class="p-6">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-red-100 mb-4 mx-auto shadow-inner shadow-red-200">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-slate-900 text-center mb-2">Confirm Deletion</h3>
+                    <p class="text-sm text-slate-500 text-center">Are you sure you want to delete <span class="font-semibold text-slate-700" x-text="itemName"></span>? This action cannot be undone.</p>
+                </div>
+                <div class="bg-slate-50 px-6 py-4 flex items-center justify-center gap-3">
+                    <button type="button" @click="showDeleteModal = false" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-slate-200">Cancel</button>
+                    <form method="POST" :action="deleteAction" class="inline m-0">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors shadow-lg shadow-red-600/20 focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Yes, delete it</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
