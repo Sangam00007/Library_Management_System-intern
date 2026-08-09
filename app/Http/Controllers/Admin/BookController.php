@@ -82,6 +82,10 @@ class BookController extends Controller
 
     public function destroy(Book $book): RedirectResponse
     {
+        if ($book->borrowings()->exists()) {
+            return redirect()->route('admin.books.index')->with('error', 'Cannot delete book because it has been borrowed by users.');
+        }
+
         if ($book->cover_image) {
             Storage::disk('public')->delete($book->cover_image);
         }

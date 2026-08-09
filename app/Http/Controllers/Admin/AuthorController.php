@@ -54,10 +54,10 @@ class AuthorController extends Controller
 
     public function destroy(Author $author): RedirectResponse
     {
-        // Check if author is used by books
-        if (method_exists($author, 'books') && $author->books()->exists()) {
+        // Check if author is used by books that have been borrowed
+        if (method_exists($author, 'books') && $author->books()->whereHas('borrowings')->exists()) {
             return redirect()->route('admin.authors.index')
-                ->with('error', 'Cannot delete author because they have books assigned to them.');
+                ->with('error', 'Cannot delete author because one or more of their books have been borrowed by users.');
         }
 
         $author->delete();

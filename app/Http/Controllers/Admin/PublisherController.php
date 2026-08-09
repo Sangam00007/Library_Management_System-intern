@@ -55,9 +55,10 @@ class PublisherController extends Controller
 
     public function destroy(Publisher $publisher): RedirectResponse
     {
-        if (method_exists($publisher, 'books') && $publisher->books()->exists()) {
+        // Check if publisher is used by books that have been borrowed
+        if (method_exists($publisher, 'books') && $publisher->books()->whereHas('borrowings')->exists()) {
             return redirect()->route('admin.publishers.index')
-                ->with('error', 'Cannot delete publisher because they have books assigned to them.');
+                ->with('error', 'Cannot delete publisher because one or more of their books have been borrowed by users.');
         }
 
         $publisher->delete();

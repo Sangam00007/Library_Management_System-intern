@@ -72,10 +72,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category): RedirectResponse
     {
-        // Check if category is used by books
-        if (method_exists($category, 'books') && $category->books()->exists()) {
+        // Check if category is used by books that have been borrowed
+        if (method_exists($category, 'books') && $category->books()->whereHas('borrowings')->exists()) {
             return redirect()->route('admin.categories.index')
-                ->with('error', 'Cannot delete category because it is assigned to one or more books.');
+                ->with('error', 'Cannot delete category because one or more of its books have been borrowed by users.');
         }
 
         // Delete the image if it exists
