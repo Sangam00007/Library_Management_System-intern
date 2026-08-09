@@ -61,10 +61,13 @@
                     <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors hidden sm:block">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                         @php
-                            $pendingReqs = App\Models\BorrowRequest::where('user_id', Auth::id())->where('status', 'pending')->count();
-                            $unpaid = App\Models\Fine::where('user_id', Auth::id())->where('status', 'unpaid')->count();
+                            $userId = Auth::id();
+                            $pendingReqs = App\Models\BorrowRequest::where('user_id', $userId)->where('status', 'pending')->count();
+                            $unpaidCount = App\Models\Fine::where('user_id', $userId)->where('status', 'unpaid')->count();
+                            $totalReturned = App\Models\Borrowing::where('user_id', $userId)->where('status', 'returned')->count();
+                            $totalFines = App\Models\Fine::where('user_id', $userId)->where('status', 'unpaid')->sum('amount');
                         @endphp
-                        @if($pendingReqs > 0 || $unpaid > 0)
+                        @if($pendingReqs > 0 || $unpaidCount > 0)
                             <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
                         @endif
                     </button>
@@ -87,6 +90,20 @@
                             <div class="px-4 py-3 border-b border-slate-50 mb-2">
                                 <p class="text-sm font-semibold text-slate-800">{{ Auth::user()->name }}</p>
                                 <p class="text-xs text-slate-500 truncate mt-0.5">{{ Auth::user()->email }}</p>
+                            </div>
+                            <div class="px-4 py-2 flex flex-col gap-2 border-b border-slate-50 mb-2">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-500 flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Books Read</span>
+                                    <span class="font-bold text-slate-800">{{ $totalReturned }}</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-500 flex items-center gap-1.5"><svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Pending</span>
+                                    <span class="font-bold text-slate-800">{{ $pendingReqs }}</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-slate-500 flex items-center gap-1.5"><svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Fines</span>
+                                    <span class="font-bold text-rose-600">Rs. {{ number_format($totalFines, 2) }}</span>
+                                </div>
                             </div>
                             <a href="{{ route('user.profile.edit') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-emerald-600 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
@@ -119,11 +136,23 @@
                 <a href="{{ route('user.dashboard') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-semibold text-base">Dashboard</a>
                 <a href="{{ route('user.books.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.books.index') || request()->routeIs('user.books.show') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">Explore Books</a>
                 <a href="{{ route('user.borrowings.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.borrowings.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">My Borrowings</a>
-                <div class="border-t border-slate-100 my-2 pt-2">
-                    <a href="#" class="flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-base">
+                <div class="border-t border-slate-100 my-2 pt-2 space-y-1">
+                    <div class="flex items-center justify-between px-4 py-2 text-sm">
+                        <span class="text-slate-500 flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Books Read</span>
+                        <span class="font-bold text-slate-800">{{ $totalReturned }}</span>
+                    </div>
+                    <div class="flex items-center justify-between px-4 py-2 text-sm">
+                        <span class="text-slate-500 flex items-center gap-2"><svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Pending</span>
+                        <span class="font-bold text-slate-800">{{ $pendingReqs }}</span>
+                    </div>
+                    <div class="flex items-center justify-between px-4 py-2 text-sm">
+                        <span class="text-slate-500 flex items-center gap-2"><svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Fines</span>
+                        <span class="font-bold text-rose-600">Rs. {{ number_format($totalFines, 2) }}</span>
+                    </div>
+                    <a href="#" class="flex items-center justify-between px-4 py-3 mt-2 rounded-xl text-slate-600 hover:bg-slate-50 font-medium text-base">
                         <span>Notifications</span>
-                        @if($pendingReqs > 0 || $unpaid > 0)
-                            <span class="bg-rose-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $pendingReqs + $unpaid }}</span>
+                        @if($pendingReqs > 0 || $unpaidCount > 0)
+                            <span class="bg-rose-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $pendingReqs + $unpaidCount }}</span>
                         @endif
                     </a>
                 </div>
