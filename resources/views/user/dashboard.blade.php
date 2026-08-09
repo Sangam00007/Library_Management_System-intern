@@ -18,77 +18,7 @@
         </a>
     </div>
 
-    <!-- Stats Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        
-        <!-- Stat Card 1 -->
-        <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1">
-            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg class="w-24 h-24 text-blue-500 transform translate-x-4 -translate-y-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg>
-            </div>
-            <div class="relative z-10">
-                <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4 shadow-sm border border-blue-50">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                </div>
-                <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Borrowing</p>
-                <div class="flex items-baseline gap-2 mt-1">
-                    <p class="text-3xl font-extrabold text-slate-800">{{ $activeBorrowings->count() }}</p>
-                    <p class="text-sm text-slate-400 font-medium">books</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- Stat Card 2 -->
-        <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1">
-            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg class="w-24 h-24 text-emerald-500 transform translate-x-4 -translate-y-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            </div>
-            <div class="relative z-10">
-                <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-4 shadow-sm border border-emerald-50">
-                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Books Read</p>
-                <div class="flex items-baseline gap-2 mt-1">
-                    <p class="text-3xl font-extrabold text-slate-800">{{ $totalReturned }}</p>
-                    <p class="text-sm text-slate-400 font-medium">total</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stat Card 3 -->
-        <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1">
-            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg class="w-24 h-24 text-amber-500 transform translate-x-4 -translate-y-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
-            </div>
-            <div class="relative z-10">
-                <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4 shadow-sm border border-amber-50">
-                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Pending</p>
-                <div class="flex items-baseline gap-2 mt-1">
-                    <p class="text-3xl font-extrabold text-slate-800">{{ $pendingRequests->count() }}</p>
-                    <p class="text-sm text-slate-400 font-medium">requests</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stat Card 4 -->
-        <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 {{ $totalFinesAmount > 0 ? 'bg-rose-50/50 border-rose-100' : '' }}">
-            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <svg class="w-24 h-24 text-rose-500 transform translate-x-4 -translate-y-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-            </div>
-            <div class="relative z-10">
-                <div class="w-12 h-12 rounded-xl {{ $totalFinesAmount > 0 ? 'bg-rose-100 text-rose-600 border border-rose-50 shadow-sm' : 'bg-slate-100 text-slate-400' }} flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Fines</p>
-                <div class="flex items-baseline gap-1 mt-1">
-                    <p class="text-xl font-bold text-slate-400">Rs.</p>
-                    <p class="text-3xl font-extrabold {{ $totalFinesAmount > 0 ? 'text-rose-600' : 'text-slate-800' }}">{{ number_format($totalFinesAmount, 2) }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
         
