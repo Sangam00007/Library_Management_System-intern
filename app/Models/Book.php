@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Book extends Model
 {
+    use HasSlug;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +28,13 @@ class Book extends Model
         'category_id',
         'author_id',
         'publisher_id',
+        'slug',
     ];
+
+    protected function getSlugSourceAttribute(): string
+    {
+        return 'title';
+    }
 
     public function category(): BelongsTo
     {

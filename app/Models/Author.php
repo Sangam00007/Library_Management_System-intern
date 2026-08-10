@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Author extends Model
 {
+    use HasSlug;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,6 +18,7 @@ class Author extends Model
     protected $fillable = [
         'name',
         'bio',
+        'slug',
     ];
 
     public function books(): HasMany
