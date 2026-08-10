@@ -15,9 +15,9 @@ class UserBookController extends Controller
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where('title', 'like', "%{$search}%")
-                  ->orWhereHas('author', function ($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
-                  });
+                ->orWhereHas('author', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
         }
 
         if ($request->filled('category')) {
@@ -33,6 +33,7 @@ class UserBookController extends Controller
     public function show(Book $book)
     {
         $book->load(['author', 'category']);
+
         return view('user.books.show', compact('book'));
     }
 }

@@ -17,7 +17,7 @@ class BorrowRequestController extends Controller
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         } else {
-             $query->where('status', 'pending');
+            $query->where('status', 'pending');
         }
 
         $requests = $query->paginate(15)->withQueryString();

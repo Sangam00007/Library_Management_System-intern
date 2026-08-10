@@ -19,7 +19,7 @@ class BorrowingController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->whereHas('user', function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                      ->orWhere('email', 'like', "%{$search}%");
+                        ->orWhere('email', 'like', "%{$search}%");
                 })->orWhereHas('book', function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%");
                 });

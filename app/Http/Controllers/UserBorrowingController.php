@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Borrowing;
 use App\Models\BorrowRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserBorrowingController extends Controller
