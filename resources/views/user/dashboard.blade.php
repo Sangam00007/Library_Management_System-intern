@@ -20,10 +20,10 @@
 
 
 
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <!-- Left Column (Wider) -->
-        <div class="xl:col-span-2 space-y-8">
+        <div class="lg:col-span-2 space-y-8">
             
             <!-- Currently Reading -->
             <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
@@ -142,7 +142,7 @@
         </div>
 
         <!-- Right Column (Narrower) -->
-        <div class="space-y-6 xl:space-y-8">
+        <div class="space-y-6 lg:space-y-8">
             
             <!-- Unpaid Fines Alert -->
             @if($unpaidFines->count() > 0)

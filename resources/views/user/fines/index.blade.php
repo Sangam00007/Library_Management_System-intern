@@ -17,7 +17,7 @@
     </div>
 
     @if($fines->count() > 0)
-        <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm">
+        <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm overflow-x-auto">
             <table class="w-full text-left text-sm">
                 <thead class="bg-slate-50/50 text-slate-500 font-semibold">
                     <tr>

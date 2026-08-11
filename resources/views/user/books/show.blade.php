@@ -22,7 +22,7 @@
         <div class="relative z-10 p-6 sm:p-12 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-16">
             
             <!-- Book Cover Column -->
-            <div class="w-full lg:w-1/3 flex-shrink-0">
+            <div class="w-2/3 mx-auto sm:w-1/2 lg:w-1/3 flex-shrink-0">
                 <div class="aspect-[2/3] bg-slate-50 rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-slate-100 relative group">
                     @if($book->cover_image)
                         <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
@@ -111,15 +111,15 @@
                     </div>
 
                     @if($book->available_copies > 0)
-                        <form action="{{ route('user.books.request', $book) }}" method="POST">
+                        <form action="{{ route('user.books.request', $book) }}" method="POST" class="w-full sm:w-auto">
                             @csrf
-                            <button type="submit" class="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all shadow-lg shadow-slate-900/20 active:scale-95 flex items-center gap-2 group">
+                            <button type="submit" class="w-full sm:w-auto justify-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all shadow-lg shadow-slate-900/20 active:scale-95 flex items-center gap-2 group">
                                 <svg class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                                 Request to Borrow
                             </button>
                         </form>
                     @else
-                        <button disabled class="px-8 py-4 bg-slate-100 text-slate-400 font-semibold rounded-2xl cursor-not-allowed flex items-center gap-2">
+                        <button disabled class="w-full sm:w-auto justify-center px-8 py-4 bg-slate-100 text-slate-400 font-semibold rounded-2xl cursor-not-allowed flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                             Currently Unavailable
                         </button>

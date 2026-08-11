@@ -3,7 +3,7 @@
 @section('title', 'My Profile | Library Management System')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-8">
+<div class="max-w-4xl mx-auto space-y-6 md:space-y-8">
     <div class="flex items-center justify-between mb-8">
         <div>
             <h1 class="text-3xl font-bold text-slate-800">My Profile</h1>
@@ -25,7 +25,7 @@
         </div>
     @endif
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         <!-- Profile Information Section -->
         <div class="md:col-span-1">
             <div class="sticky top-28">
@@ -88,9 +88,9 @@
         </div>
     </div>
 
-    <div class="h-px bg-slate-200/60 my-10"></div>
+    <div class="h-px bg-slate-200/60 my-8 md:my-10"></div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pb-12">
         <!-- Update Password Section -->
         <div class="md:col-span-1">
             <div class="sticky top-28">

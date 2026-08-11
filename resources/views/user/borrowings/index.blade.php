@@ -87,7 +87,7 @@
         <div x-show="tab === 'requests'" style="display: none;" x-cloak x-transition>
             @php $pendingRequests = $requests->whereIn('status', ['pending', 'rejected']); @endphp
             @if($pendingRequests->count() > 0)
-                <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm">
+                <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm overflow-x-auto">
                     <table class="w-full text-left text-sm">
                         <thead class="bg-slate-50/50 text-slate-500 font-semibold">
                             <tr>
@@ -142,7 +142,7 @@
         <div x-show="tab === 'history'" style="display: none;" x-cloak x-transition>
              @php $pastBorrowings = $borrowings->where('status', 'returned'); @endphp
              @if($pastBorrowings->count() > 0)
-                <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm">
+                <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm overflow-x-auto">
                     <table class="w-full text-left text-sm">
                         <thead class="bg-slate-50/50 text-slate-500 font-semibold">
                             <tr>
