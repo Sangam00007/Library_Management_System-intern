@@ -52,6 +52,7 @@
                         <a href="{{ route('user.dashboard') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-semibold text-sm transition-colors">Dashboard</a>
                         <a href="{{ route('user.books.index') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.books.index') || request()->routeIs('user.books.show') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-medium text-sm transition-colors">Explore Books</a>
                         <a href="{{ route('user.borrowings.index') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.borrowings.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-medium text-sm transition-colors">My Borrowings</a>
+                        <a href="{{ route('user.fines.index') }}" class="px-4 py-2 rounded-xl {{ request()->routeIs('user.fines.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }} font-medium text-sm transition-colors">My Fines</a>
                     </div>
                 </div>
 
@@ -136,6 +137,7 @@
                 <a href="{{ route('user.dashboard') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-semibold text-base">Dashboard</a>
                 <a href="{{ route('user.books.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.books.index') || request()->routeIs('user.books.show') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">Explore Books</a>
                 <a href="{{ route('user.borrowings.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.borrowings.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">My Borrowings</a>
+                <a href="{{ route('user.fines.index') }}" class="block px-4 py-3 rounded-xl {{ request()->routeIs('user.fines.index') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50' }} font-medium text-base">My Fines</a>
                 <div class="border-t border-slate-100 my-2 pt-2 space-y-1">
                     <div class="flex items-center justify-between px-4 py-2 text-sm">
                         <span class="text-slate-500 flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Books Read</span>
@@ -207,6 +209,7 @@
                         <li><a href="{{ route('user.dashboard') }}" class="text-sm text-slate-500 hover:text-emerald-600 transition-colors inline-block">Dashboard</a></li>
                         <li><a href="{{ route('user.books.index') }}" class="text-sm text-slate-500 hover:text-emerald-600 transition-colors inline-block">Explore Books</a></li>
                         <li><a href="{{ route('user.borrowings.index') }}" class="text-sm text-slate-500 hover:text-emerald-600 transition-colors inline-block">My Borrowings</a></li>
+                        <li><a href="{{ route('user.fines.index') }}" class="text-sm text-slate-500 hover:text-emerald-600 transition-colors inline-block">My Fines</a></li>
                         <li><a href="{{ route('user.profile.edit') }}" class="text-sm text-slate-500 hover:text-emerald-600 transition-colors inline-block">My Profile</a></li>
                     </ul>
                 </div>

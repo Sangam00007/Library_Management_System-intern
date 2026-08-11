@@ -43,6 +43,9 @@ class UserDashboardController extends Controller
             ->take(5)
             ->get();
 
+        $featuredBooks = Book::with('author')->inRandomOrder()->take(12)->get();
+        $latestBooks = Book::with('author')->latest()->take(6)->get();
+
         return view('user.dashboard', compact(
             'activeBorrowings',
             'pendingRequests',
@@ -52,6 +55,8 @@ class UserDashboardController extends Controller
             'totalFinesAmount',
             'totalBooks',
             'recentActivity',
+            'featuredBooks',
+            'latestBooks',
         ));
     }
 }
