@@ -28,8 +28,12 @@ Route::get('/', function () {
         'totalMembers' => User::count(),
         'totalCategories' => Category::count(),
         'totalAuthors' => Author::count(),
+        'featuredBooks' => Book::with(['author', 'category'])->latest()->limit(10)->get(),
     ]);
 });
+
+Route::view('/privacy-policy', 'privacy')->name('privacy');
+Route::view('/safety-guidelines', 'safety')->name('safety');
 
 // User Authentication Routes
 Route::middleware('guest')->group(function () {
