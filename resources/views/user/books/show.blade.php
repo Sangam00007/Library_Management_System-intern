@@ -111,7 +111,7 @@
                     </div>
 
                     @if($book->available_copies > 0)
-                        <form action="{{ route('user.books.request', $book) }}" method="POST" class="w-full sm:w-auto">
+                        <form action="{{ route('user.books.request', $book) }}" method="POST" class="w-full sm:w-auto" onsubmit="return confirm('Are you sure you want to request to borrow this book?');">
                             @csrf
                             <button type="submit" class="w-full sm:w-auto justify-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all shadow-lg shadow-slate-900/20 active:scale-95 flex items-center gap-2 group">
                                 <svg class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
