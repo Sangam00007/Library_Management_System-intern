@@ -49,4 +49,27 @@ class UserProfileController extends Controller
 
         return back()->with('status', 'password-updated');
     }
+
+    public function savePreferences(Request $request)
+    {
+        $validated = $request->validate([
+            'categories' => ['nullable', 'array'],
+            'categories.*' => ['integer', 'exists:categories,id'],
+            'authors' => ['nullable', 'array'],
+            'authors.*' => ['integer', 'exists:authors,id'],
+            'publishers' => ['nullable', 'array'],
+            'publishers.*' => ['integer', 'exists:publishers,id'],
+        ]);
+
+        $request->user()->update([
+            'preferences' => [
+                'categories' => $validated['categories'] ?? [],
+                'authors' => $validated['authors'] ?? [],
+                'publishers' => $validated['publishers'] ?? [],
+            ],
+            'wizard_completed' => true,
+        ]);
+
+        return redirect()->route('user.dashboard')->with('success', 'Preferences saved successfully!');
+    }
 }

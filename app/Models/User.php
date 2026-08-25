@@ -24,6 +24,8 @@ class User extends Authenticatable
         'password',
         'contact',
         'location',
+        'preferences',
+        'wizard_completed',
     ];
 
     /**
@@ -46,6 +48,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'preferences' => 'array',
+            'wizard_completed' => 'boolean',
         ];
     }
 }

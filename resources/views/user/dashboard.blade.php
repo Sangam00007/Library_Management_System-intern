@@ -2,6 +2,8 @@
 @section('title', 'My Dashboard - Library Management System')
 
 @section('content')
+@include('user.components.preferences-wizard')
+
 <div class="space-y-8">
     
     <!-- Welcome Section -->

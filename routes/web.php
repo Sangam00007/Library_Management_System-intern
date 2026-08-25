@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserProfileController::class, 'edit'])->name('user.profile.edit');
     Route::patch('/profile', [UserProfileController::class, 'update'])->name('user.profile.update');
     Route::patch('/profile/password', [UserProfileController::class, 'updatePassword'])->name('user.password.update');
+    Route::post('/profile/preferences', [UserProfileController::class, 'savePreferences'])->name('user.preferences.save');
 });
 
 // Admin Routes

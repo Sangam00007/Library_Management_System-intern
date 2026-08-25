@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\Borrowing;
 use App\Models\BorrowRequest;
+use App\Models\Category;
 use App\Models\Fine;
+use App\Models\Publisher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -46,6 +49,13 @@ class UserDashboardController extends Controller
         $featuredBooks = Book::with('author')->inRandomOrder()->take(12)->get();
         $latestBooks = Book::with('author')->latest()->take(6)->get();
 
+        $wizardData = [];
+        if (! $user->wizard_completed) {
+            $wizardData['categories'] = Category::orderBy('name')->get();
+            $wizardData['authors'] = Author::orderBy('name')->get();
+            $wizardData['publishers'] = Publisher::orderBy('name')->get();
+        }
+
         return view('user.dashboard', compact(
             'activeBorrowings',
             'pendingRequests',
@@ -57,6 +67,7 @@ class UserDashboardController extends Controller
             'recentActivity',
             'featuredBooks',
             'latestBooks',
+            'wizardData'
         ));
     }
 }
