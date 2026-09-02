@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use Database\Factories\BorrowingFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Borrowing extends Model
 {
+    /** @use HasFactory<BorrowingFactory> */
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use App\Traits\HasSlug;
+use Database\Factories\BookFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Book extends Model
 {
-    use HasSlug;
+    /** @use HasFactory<BookFactory> */
+    use HasFactory, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -54,5 +57,15 @@ class Book extends Model
     public function borrowings(): HasMany
     {
         return $this->hasMany(Borrowing::class);
+    }
+
+    public function borrowRequests(): HasMany
+    {
+        return $this->hasMany(BorrowRequest::class);
+    }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

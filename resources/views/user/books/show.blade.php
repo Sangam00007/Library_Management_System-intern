@@ -129,5 +129,44 @@
             </div>
         </div>
     </div>
+
+    <!-- You May Also Like Section -->
+    @if($similarBooks->isNotEmpty())
+    <div>
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                <svg class="w-6 h-6 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                You May Also Like
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            @foreach($similarBooks as $similar)
+                <a href="{{ route('user.books.show', $similar) }}" class="group flex flex-col h-full cursor-pointer">
+                    <div class="w-full aspect-[2/3] bg-slate-100 rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg group-hover:shadow-violet-500/10 transition-all duration-300 relative border border-slate-100 group-hover:border-violet-200 group-hover:-translate-y-1">
+                        @if($similar->cover_image)
+                            <img src="{{ Storage::url($similar->cover_image) }}" alt="{{ $similar->title }}" class="w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full flex flex-col items-center justify-center text-slate-300 bg-slate-50">
+                                <svg class="w-8 h-8 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                        @endif
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                            <span class="text-white text-xs font-semibold">View Details</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex-1 flex flex-col">
+                        <h4 class="text-sm font-bold text-slate-800 line-clamp-2 leading-tight group-hover:text-violet-700 transition-colors">{{ $similar->title }}</h4>
+                        <p class="text-xs text-slate-500 mt-1 line-clamp-1">{{ $similar->author->name ?? 'Unknown' }}</p>
+                        @if($similar->category)
+                            <p class="text-[10px] font-medium text-emerald-600 bg-emerald-50 rounded-full px-2 py-0.5 mt-2 inline-block w-fit">{{ $similar->category->name }}</p>
+                        @endif
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
 </div>
 @endsection

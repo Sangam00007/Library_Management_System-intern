@@ -216,12 +216,17 @@
         </div>
     </div>
 
-    <!-- Featured Books Section -->
+    <!-- Recommended for You Section -->
     <div>
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                <svg class="w-6 h-6 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                Featured Books
+                @if($hasPreferences)
+                    <svg class="w-6 h-6 text-violet-500" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
+                    Recommended for You
+                @else
+                    <svg class="w-6 h-6 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    Popular Books
+                @endif
             </h2>
             <a href="{{ route('user.books.index') }}" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1">
                 View catalog
@@ -230,9 +235,9 @@
         </div>
         
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            @forelse($featuredBooks as $book)
+            @forelse($recommendedBooks as $book)
                 <a href="{{ route('user.books.show', $book) }}" class="group flex flex-col h-full cursor-pointer">
-                    <div class="w-full aspect-[2/3] bg-slate-100 rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg group-hover:shadow-emerald-500/10 transition-all duration-300 relative border border-slate-100 group-hover:border-emerald-200 group-hover:-translate-y-1">
+                    <div class="w-full aspect-[2/3] bg-slate-100 rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg group-hover:shadow-violet-500/10 transition-all duration-300 relative border border-slate-100 group-hover:border-violet-200 group-hover:-translate-y-1">
                         @if($book->cover_image)
                             <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
                         @else
@@ -245,13 +250,16 @@
                         </div>
                     </div>
                     <div class="mt-3 flex-1 flex flex-col">
-                        <h4 class="text-sm font-bold text-slate-800 line-clamp-2 leading-tight group-hover:text-emerald-700 transition-colors">{{ $book->title }}</h4>
+                        <h4 class="text-sm font-bold text-slate-800 line-clamp-2 leading-tight group-hover:text-violet-700 transition-colors">{{ $book->title }}</h4>
                         <p class="text-xs text-slate-500 mt-1 line-clamp-1">{{ $book->author->name ?? 'Unknown' }}</p>
+                        @if($book->recommendation_reason)
+                            <p class="text-[10px] font-medium text-violet-600 bg-violet-50 rounded-full px-2 py-0.5 mt-2 inline-block w-fit truncate max-w-full">{{ $book->recommendation_reason }}</p>
+                        @endif
                     </div>
                 </a>
             @empty
                 <div class="col-span-full py-12 text-center bg-white rounded-3xl border border-slate-100">
-                    <p class="text-slate-500 font-medium">No featured books available at the moment.</p>
+                    <p class="text-slate-500 font-medium">No recommendations available yet. Borrow some books to get personalized suggestions!</p>
                 </div>
             @endforelse
         </div>

@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\BorrowRequest;
+use App\Services\BookRecommendationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserBorrowRequestController extends Controller
 {
+    public function __construct(private BookRecommendationService $recommendationService) {}
+
     public function store(Book $book)
     {
         $user = Auth::user();
@@ -34,6 +37,8 @@ class UserBorrowRequestController extends Controller
             'book_id' => $book->id,
             'status' => 'pending',
         ]);
+
+        $this->recommendationService->invalidateForUser($user);
 
         return back()->with('success', 'Your request to borrow this book has been submitted successfully.');
     }

@@ -9,11 +9,14 @@ use App\Models\BorrowRequest;
 use App\Models\Category;
 use App\Models\Fine;
 use App\Models\Publisher;
+use App\Services\BookRecommendationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class UserDashboardController extends Controller
 {
+    public function __construct(private BookRecommendationService $recommendationService) {}
+
     public function index(): View
     {
         $user = Auth::user();
@@ -46,8 +49,10 @@ class UserDashboardController extends Controller
             ->take(5)
             ->get();
 
-        $featuredBooks = Book::with('author')->inRandomOrder()->take(12)->get();
+        $recommendedBooks = $this->recommendationService->getRecommendationsForUser($user, 12);
         $latestBooks = Book::with('author')->latest()->take(6)->get();
+
+        $hasPreferences = ! empty($user->preferences);
 
         $wizardData = [];
         if (! $user->wizard_completed) {
@@ -65,8 +70,9 @@ class UserDashboardController extends Controller
             'totalFinesAmount',
             'totalBooks',
             'recentActivity',
-            'featuredBooks',
+            'recommendedBooks',
             'latestBooks',
+            'hasPreferences',
             'wizardData'
         ));
     }

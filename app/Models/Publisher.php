@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Traits\HasSlug;
+use Database\Factories\PublisherFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Publisher extends Model
 {
-    use HasSlug;
+    /** @use HasFactory<PublisherFactory> */
+    use HasFactory, HasSlug;
 
     /**
      * The attributes that are mass assignable.

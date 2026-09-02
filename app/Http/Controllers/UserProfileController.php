@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\BookRecommendationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -9,6 +10,8 @@ use Illuminate\Validation\Rules\Password;
 
 class UserProfileController extends Controller
 {
+    public function __construct(private BookRecommendationService $recommendationService) {}
+
     public function edit()
     {
         return view('user.profile', [
@@ -69,6 +72,8 @@ class UserProfileController extends Controller
             ],
             'wizard_completed' => true,
         ]);
+
+        $this->recommendationService->invalidateForUser($request->user());
 
         return redirect()->route('user.dashboard')->with('success', 'Preferences saved successfully!');
     }
