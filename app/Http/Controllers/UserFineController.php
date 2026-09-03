@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Fine;
+use Illuminate\Support\Facades\Auth;
 
 class UserFineController extends Controller
 {
     public function index()
     {
-        $fines = \App\Models\Fine::where('user_id', \Illuminate\Support\Facades\Auth::id())
+        $fines = Fine::where('user_id', Auth::id())
             ->with('borrowing.book')
             ->latest()
             ->get();

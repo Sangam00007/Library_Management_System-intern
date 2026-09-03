@@ -344,7 +344,7 @@
     </nav>
 
     <!-- ═══════════════════ HERO SECTION ═══════════════════ -->
-    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+    <section class="relative pt-24 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
         <!-- Background blobs -->
         <div class="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] bg-emerald-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-20"
             style="animation: pulse-soft 6s ease-in-out infinite;"></div>
@@ -396,13 +396,13 @@
                     </h1>
 
                     <p
-                        class="animate-fade-up delay-200 mt-6 text-lg sm:text-xl text-slate-500 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        class="animate-fade-up delay-200 mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-slate-500 leading-relaxed max-w-xl mx-auto lg:mx-0">
                         Discover, borrow, and manage books effortlessly. Our smart library system keeps track of
                         everything — so you can focus on reading.
                     </p>
 
                     <div
-                        class="animate-fade-up delay-300 mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                        class="animate-fade-up delay-300 mt-8 sm:mt-10 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start">
                         <a href="{{ route('register') }}"
                             class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold text-white bg-gradient-to-r from-emerald-500 to-blue-600 rounded-xl shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:from-emerald-400 hover:to-blue-500 transition-all transform hover:-translate-y-0.5"
                             id="hero-register">
@@ -498,16 +498,16 @@
     </section>
 
     <!-- ═══════════════════ FEATURED BOOKS ═══════════════════ -->
-    <section id="featured-books" class="py-20 lg:py-28 relative bg-white">
+    <section id="featured-books" class="py-16 sm:py-20 lg:py-28 relative bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
+            <div class="text-center mb-10 sm:mb-16 reveal">
                 <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold tracking-wide uppercase mb-4">Discover</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Featured <span class="text-gradient">Books</span></h2>
                 <p class="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">Explore some of our latest and most popular additions to the library.</p>
             </div>
             
             @if(isset($featuredBooks) && $featuredBooks->count() > 0)
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
                 @foreach($featuredBooks as $book)
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full reveal" style="animation-delay: {{ $loop->index * 50 }}ms">
                     <div class="aspect-[2/3] w-full bg-slate-100 relative overflow-hidden">

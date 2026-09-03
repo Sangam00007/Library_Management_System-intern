@@ -21,15 +21,15 @@
                     <!-- Search Input -->
                     <div class="flex-1 relative flex items-center">
                         <svg class="absolute left-4 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search books, authors..." class="w-full bg-transparent border-0 py-3 pl-12 pr-4 text-slate-900 placeholder:text-slate-400 focus:ring-0 focus:outline-none rounded-xl sm:rounded-full text-base">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search books, authors..." class="w-full bg-transparent border-0 py-3 pl-12 pr-4 text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-emerald-500/50 focus:outline-none rounded-xl sm:rounded-full text-base">
                     </div>
                     
                     <div class="hidden sm:block w-px h-8 bg-slate-200 my-auto"></div>
 
                     <!-- Category Filter -->
-                    <div class="sm:w-48 relative flex items-center">
+                    <div class="w-full sm:w-48 relative flex items-center border-t border-slate-100 sm:border-0 pt-2 sm:pt-0">
                         <svg class="absolute left-4 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-                        <select name="category" class="w-full bg-transparent border-0 py-3 pl-12 pr-10 text-slate-900 focus:ring-0 focus:outline-none appearance-none rounded-xl sm:rounded-full font-medium cursor-pointer" onchange="this.form.submit()">
+                        <select name="category" class="w-full bg-transparent border-0 py-3 pl-12 pr-10 text-slate-900 focus:ring-2 focus:ring-emerald-500/50 focus:outline-none appearance-none rounded-xl sm:rounded-full font-medium cursor-pointer" onchange="this.form.submit()">
                             <option value="">All Categories</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -66,7 +66,7 @@
         </div>
 
         @if($books->count() > 0)
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+            <div class="grid grid-cols-2 min-[480px]:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                 @foreach($books as $book)
                     <a href="{{ route('user.books.show', $book) }}" class="bg-white rounded-3xl border border-slate-100 p-3 sm:p-4 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full cursor-pointer relative overflow-hidden">
                         

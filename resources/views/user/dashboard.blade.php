@@ -234,7 +234,7 @@
             </a>
         </div>
         
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div class="grid grid-cols-2 min-[480px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
             @forelse($recommendedBooks as $book)
                 <a href="{{ route('user.books.show', $book) }}" class="group flex flex-col h-full cursor-pointer">
                     <div class="w-full aspect-[2/3] bg-slate-100 rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg group-hover:shadow-violet-500/10 transition-all duration-300 relative border border-slate-100 group-hover:border-violet-200 group-hover:-translate-y-1">
@@ -274,7 +274,7 @@
             </h2>
         </div>
         
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div class="grid grid-cols-2 min-[480px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
             @forelse($latestBooks as $book)
                 <a href="{{ route('user.books.show', $book) }}" class="group flex flex-col h-full cursor-pointer">
                     <div class="w-full aspect-[2/3] bg-slate-100 rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg group-hover:shadow-blue-500/10 transition-all duration-300 relative border border-slate-100 group-hover:border-blue-200 group-hover:-translate-y-1">
