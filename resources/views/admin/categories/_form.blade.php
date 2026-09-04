@@ -57,7 +57,6 @@
                     <p class="text-sm text-slate-500"><span class="font-semibold text-amber-600">Click to upload</span> or drag and drop</p>
                     <p class="text-xs text-slate-400 mt-1">PNG, JPG, GIF or WebP (Max 2MB)</p>
                 </div>
-                <input id="image" name="image" type="file" class="hidden" accept="image/*" @change="handleFileSelect($event)">
             </label>
 
             <!-- Change button when preview is showing -->
@@ -66,8 +65,9 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     Change Image
                 </label>
-                <input id="image" name="image" type="file" class="hidden" accept="image/*" @change="handleFileSelect($event)">
             </div>
+
+            <input id="image" name="image" type="file" class="hidden" accept="image/*" @change="handleFileSelect($event)">
 
             @error('image')
                 <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
