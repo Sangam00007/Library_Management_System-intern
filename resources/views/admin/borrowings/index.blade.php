@@ -84,14 +84,18 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 @if($borrowing->status !== 'returned')
-                                    <form method="POST" action="{{ route('admin.borrowings.return', $borrowing) }}" class="inline" onsubmit="return confirm('Mark this book as returned?')">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-xs font-medium text-slate-900 rounded-lg shadow-lg shadow-indigo-500/30 transition-all flex items-center gap-1.5 ml-auto">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
-                                            Mark Returned
-                                        </button>
-                                    </form>
+                                    <button type="button" @click="$dispatch('open-confirm-modal', { 
+                                            action: '{{ route('admin.borrowings.return', $borrowing) }}', 
+                                            method: 'PATCH',
+                                            title: 'Mark as Returned',
+                                            message: 'Are you sure you want to mark the book <span class=\'font-semibold text-slate-700\'>{{ addslashes($borrowing->book?->title) }}</span> as returned?',
+                                            buttonText: 'Mark Returned',
+                                            buttonClass: 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 shadow-indigo-600/20',
+                                            iconType: 'info'
+                                        })" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-xs font-medium text-slate-900 rounded-lg shadow-lg shadow-indigo-500/30 transition-all flex items-center gap-1.5 ml-auto">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
+                                        Mark Returned
+                                    </button>
                                 @endif
                             </td>
                         </tr>

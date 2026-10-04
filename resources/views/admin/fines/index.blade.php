@@ -78,14 +78,18 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 @if($fine->status === 'unpaid')
-                                    <form method="POST" action="{{ route('admin.fines.pay', $fine) }}" class="inline" onsubmit="return confirm('Mark this fine as paid?')">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="px-3 py-1.5 bg-green-600 hover:bg-green-500 text-xs font-medium text-slate-900 rounded-lg shadow-lg shadow-green-500/30 transition-all flex items-center gap-1.5 ml-auto">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                            Mark Paid
-                                        </button>
-                                    </form>
+                                    <button type="button" @click="$dispatch('open-confirm-modal', { 
+                                            action: '{{ route('admin.fines.pay', $fine) }}', 
+                                            method: 'PATCH',
+                                            title: 'Mark Fine as Paid',
+                                            message: 'Are you sure you want to mark this fine as paid?',
+                                            buttonText: 'Mark Paid',
+                                            buttonClass: 'bg-green-600 hover:bg-green-700 focus:ring-green-500 shadow-green-600/20',
+                                            iconType: 'success'
+                                        })" class="px-3 py-1.5 bg-green-600 hover:bg-green-500 text-xs font-medium text-slate-900 rounded-lg shadow-lg shadow-green-500/30 transition-all flex items-center gap-1.5 ml-auto">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        Mark Paid
+                                    </button>
                                 @endif
                             </td>
                         </tr>
