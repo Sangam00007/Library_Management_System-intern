@@ -341,6 +341,62 @@
 
         </div>
     </footer>
+    <!-- Global Action Confirmation Modal -->
+    <div x-data="{ 
+            showConfirmModal: false, 
+            actionUrl: '', 
+            httpMethod: 'POST',
+            modalTitle: 'Confirm Action',
+            modalMessage: 'Are you sure you want to proceed?',
+            confirmButtonText: 'Confirm',
+            confirmButtonClass: 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500 shadow-emerald-600/20',
+            iconType: 'info'
+         }" 
+         @open-confirm-modal.window="
+            showConfirmModal = true; 
+            actionUrl = $event.detail.action; 
+            httpMethod = $event.detail.method || 'POST';
+            modalTitle = $event.detail.title || 'Confirm Action';
+            modalMessage = $event.detail.message || 'Are you sure you want to proceed?';
+            confirmButtonText = $event.detail.buttonText || 'Confirm';
+            confirmButtonClass = $event.detail.buttonClass || 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500 shadow-emerald-600/20';
+            iconType = $event.detail.iconType || 'info';
+         ">
+        <!-- Modal Backdrop -->
+        <div x-show="showConfirmModal" style="display: none;" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] transition-opacity"
+             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+        
+        <!-- Modal Content -->
+        <div x-show="showConfirmModal" style="display: none;" class="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-0"
+             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+            <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden w-full max-w-md transform transition-all" @click.away="showConfirmModal = false">
+                <div class="p-8">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl mb-6 mx-auto" 
+                         :class="{
+                            'bg-rose-50 text-rose-600 border border-rose-100': iconType === 'warning',
+                            'bg-emerald-50 text-emerald-600 border border-emerald-100': iconType === 'success',
+                            'bg-blue-50 text-blue-600 border border-blue-100': iconType === 'info'
+                         }">
+                        <svg x-show="iconType === 'warning'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <svg x-show="iconType === 'success'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <svg x-show="iconType === 'info'" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 text-center mb-3" x-text="modalTitle"></h3>
+                    <p class="text-base text-slate-500 text-center leading-relaxed" x-html="modalMessage"></p>
+                </div>
+                <div class="bg-slate-50/50 px-8 py-6 flex items-center justify-center gap-4 border-t border-slate-100">
+                    <button type="button" @click="showConfirmModal = false" class="flex-1 px-6 py-3 text-sm font-semibold text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-all focus:ring-4 focus:ring-slate-100">Cancel</button>
+                    <form method="POST" :action="actionUrl" class="flex-1 inline m-0">
+                        @csrf
+                        <input type="hidden" name="_method" :value="httpMethod">
+                        <button type="submit" class="w-full px-6 py-3 text-sm font-bold text-white rounded-xl transition-all shadow-lg hover:-translate-y-0.5 focus:ring-4 focus:ring-opacity-50" :class="confirmButtonClass" x-text="confirmButtonText"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
