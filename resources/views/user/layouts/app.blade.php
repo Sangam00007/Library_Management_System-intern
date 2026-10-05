@@ -82,24 +82,75 @@
                 <!-- Right Side (User Menu & Notifications) -->
                 <div class="flex items-center gap-2 sm:gap-4">
                     <!-- Notifications -->
-                    <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors hidden sm:block">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                            </path>
-                        </svg>
-                        @php
-                            $userId = Auth::id();
-                            $pendingReqs = App\Models\BorrowRequest::where('user_id', $userId)->where('status', 'pending')->count();
-                            $unpaidCount = App\Models\Fine::where('user_id', $userId)->where('status', 'unpaid')->count();
-                            $totalReturned = App\Models\Borrowing::where('user_id', $userId)->where('status', 'returned')->count();
-                            $totalFines = App\Models\Fine::where('user_id', $userId)->where('status', 'unpaid')->sum('amount');
-                        @endphp
-                        @if($pendingReqs > 0 || $unpaidCount > 0)
-                            <span
-                                class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
-                        @endif
-                    </button>
+                    <div class="relative hidden sm:block" x-data="{ notifOpen: false }">
+                        <button @click="notifOpen = !notifOpen" @click.away="notifOpen = false" class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none rounded-full">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                </path>
+                            </svg>
+                            @php
+                                $userId = Auth::id();
+                                $pendingReqs = App\Models\BorrowRequest::where('user_id', $userId)->where('status', 'pending')->count();
+                                $unpaidCount = App\Models\Fine::where('user_id', $userId)->where('status', 'unpaid')->count();
+                                $totalReturned = App\Models\Borrowing::where('user_id', $userId)->where('status', 'returned')->count();
+                                $totalFines = App\Models\Fine::where('user_id', $userId)->where('status', 'unpaid')->sum('amount');
+                            @endphp
+                            @if($pendingReqs > 0 || $unpaidCount > 0)
+                                <span
+                                    class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
+                            @endif
+                        </button>
+
+                        <div x-show="notifOpen" style="display: none;" x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-slate-100 py-2 z-50">
+                            <div class="px-4 py-3 border-b border-slate-50 flex justify-between items-center">
+                                <h3 class="text-sm font-semibold text-slate-800">Notifications</h3>
+                                @if($pendingReqs > 0 || $unpaidCount > 0)
+                                    <span class="bg-rose-100 text-rose-600 text-xs font-bold px-2 py-0.5 rounded-full">{{ $pendingReqs + $unpaidCount }} New</span>
+                                @endif
+                            </div>
+                            <div class="max-h-80 overflow-y-auto">
+                                @if($pendingReqs == 0 && $unpaidCount == 0)
+                                    <div class="px-4 py-6 text-center text-sm text-slate-500">
+                                        <p>No new notifications</p>
+                                    </div>
+                                @else
+                                    @if($pendingReqs > 0)
+                                        <a href="{{ route('user.borrowings.index') }}" class="block px-4 py-3 hover:bg-slate-50 border-b border-slate-50 transition-colors">
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                </div>
+                                                <div>
+                                                    <p class="text-sm font-medium text-slate-800">Pending Book Requests</p>
+                                                    <p class="text-xs text-slate-500 mt-0.5">You have {{ $pendingReqs }} pending book request(s) waiting for approval.</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endif
+                                    @if($unpaidCount > 0)
+                                        <a href="{{ route('user.fines.index') }}" class="block px-4 py-3 hover:bg-slate-50 border-b border-slate-50 transition-colors">
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                </div>
+                                                <div>
+                                                    <p class="text-sm font-medium text-slate-800">Unpaid Fines</p>
+                                                    <p class="text-xs text-slate-500 mt-0.5">You have {{ $unpaidCount }} unpaid fine(s) totaling Rs. {{ number_format($totalFines, 2) }}.</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endif
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
 
