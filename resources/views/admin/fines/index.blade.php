@@ -63,7 +63,7 @@
                                 {{ $fine->borrowing?->due_date?->format('M d, Y') ?? '—' }}
                             </td>
                             <td class="px-6 py-4 font-semibold text-slate-900">
-                                Rs {{ number_format($fine->amount, 2) }}
+                                Rs. {{ number_format($fine->amount, 2) }}
                             </td>
                             <td class="px-6 py-4">
                                 @if($fine->status === 'paid')

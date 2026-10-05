@@ -121,11 +121,11 @@
             </div>
             <div class="flex items-center gap-4 relative z-10">
                 <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-xl">
-                    Rs
+                    Rs.
                 </div>
                 <div>
                     <p class="text-sm font-medium text-slate-500">Total Fines Collected</p>
-                    <h3 class="text-2xl font-bold text-slate-900 mt-1">Rs {{ number_format($totalFinesCollected, 2) }}</h3>
+                    <h3 class="text-2xl font-bold text-slate-900 mt-1">Rs. {{ number_format($totalFinesCollected, 2) }}</h3>
                 </div>
             </div>
             <div class="mt-4 flex items-center text-sm relative z-10">
