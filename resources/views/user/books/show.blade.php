@@ -5,29 +5,29 @@
 <div class="space-y-10">
 
     <!-- Back Button & Breadcrumbs -->
-    <div class="flex items-center gap-4 text-sm font-medium text-slate-500">
-        <a href="{{ route('user.books.index') }}" class="flex items-center gap-2 hover:text-emerald-600 transition-colors">
+    <div class="flex items-center gap-4 text-sm font-medium text-slate-500 dark:text-slate-400">
+        <a href="{{ route('user.books.index') }}" class="flex items-center gap-2 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             Back to Books
         </a>
-        <span class="text-slate-300">/</span>
-        <span class="text-slate-700 truncate max-w-[200px] sm:max-w-md">{{ $book->title }}</span>
+        <span class="text-slate-300 dark:text-slate-600">/</span>
+        <span class="text-slate-700 dark:text-slate-200 truncate max-w-[200px] sm:max-w-md">{{ $book->title }}</span>
     </div>
 
     <!-- Main Content Area -->
-    <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden relative">
-        <div class="absolute -right-40 -top-40 w-96 h-96 bg-emerald-400/10 rounded-full blur-[100px]"></div>
-        <div class="absolute -left-40 -bottom-40 w-96 h-96 bg-blue-400/10 rounded-full blur-[100px]"></div>
+    <div class="bg-white dark:bg-surface-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-white/5 overflow-hidden relative animate-fade-up">
+        <div class="absolute -right-40 -top-40 w-96 h-96 bg-accent-400/10 dark:bg-accent-500/5 rounded-full blur-[100px]"></div>
+        <div class="absolute -left-40 -bottom-40 w-96 h-96 bg-mustard-400/10 dark:bg-mustard-500/5 rounded-full blur-[100px]"></div>
 
         <div class="relative z-10 p-6 sm:p-12 lg:p-16 flex flex-col lg:flex-row gap-12 lg:gap-16">
-            
+
             <!-- Book Cover Column -->
-            <div class="w-2/3 mx-auto sm:w-1/2 lg:w-1/3 flex-shrink-0">
-                <div class="aspect-[2/3] bg-slate-50 rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-slate-100 relative group">
+            <div class="w-2/3 mx-auto sm:w-1/2 lg:w-1/3 shrink-0">
+                <div class="aspect-[2/3] bg-slate-50 dark:bg-white/[0.02] rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 dark:shadow-black/30 border border-slate-100 dark:border-white/5 relative group">
                     @if($book->cover_image)
                         <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     @else
-                        <div class="w-full h-full flex flex-col items-center justify-center text-slate-300 gap-4">
+                        <div class="w-full h-full flex flex-col items-center justify-center text-slate-300 dark:text-slate-600 gap-4">
                             <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                             <span class="text-sm font-semibold tracking-widest uppercase">No Cover</span>
                         </div>
@@ -41,73 +41,73 @@
                 <div class="space-y-8">
                     <!-- Title & Author -->
                     <div class="space-y-4">
-                        <div class="flex items-center gap-3">
-                            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold uppercase tracking-wider rounded-lg border border-emerald-100">{{ $book->category->name }}</span>
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <span class="px-3 py-1 bg-accent-50 dark:bg-accent-500/10 text-accent-700 dark:text-accent-400 text-xs font-bold uppercase tracking-wider rounded-lg border border-accent-100 dark:border-accent-500/20">{{ $book->category->name }}</span>
                             @if($book->available_copies > 0)
-                                <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider rounded-lg border border-blue-100 flex items-center gap-1.5">
+                                <span class="px-3 py-1 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-wider rounded-lg border border-blue-100 dark:border-blue-500/20 flex items-center gap-1.5">
                                     <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
                                     Available
                                 </span>
                             @else
-                                <span class="px-3 py-1 bg-rose-50 text-rose-700 text-xs font-bold uppercase tracking-wider rounded-lg border border-rose-100">
+                                <span class="px-3 py-1 bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-400 text-xs font-bold uppercase tracking-wider rounded-lg border border-rose-100 dark:border-rose-500/20">
                                     Unavailable
                                 </span>
                             @endif
                         </div>
-                        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">{{ $book->title }}</h1>
-                        <p class="text-lg sm:text-xl font-medium text-slate-500 flex items-center gap-2">
-                            <span class="text-slate-400">by</span>
-                            <span class="text-slate-800">{{ $book->author->name }}</span>
+                        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight font-display">{{ $book->title }}</h1>
+                        <p class="text-lg sm:text-xl font-medium text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                            <span class="text-slate-400 dark:text-slate-500">by</span>
+                            <span class="text-slate-800 dark:text-white">{{ $book->author->name }}</span>
                         </p>
                     </div>
 
                     <!-- Description -->
-                    <div class="prose prose-slate prose-lg max-w-none text-slate-600">
+                    <div class="prose prose-slate dark:prose-invert prose-lg max-w-none text-slate-600 dark:text-slate-300">
                         @if($book->description)
                             <p>{{ $book->description }}</p>
                         @else
-                            <p class="italic text-slate-400">No description available for this book.</p>
+                            <p class="italic text-slate-400 dark:text-slate-500">No description available for this book.</p>
                         @endif
                     </div>
 
                     <!-- Meta Grid -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 py-6 border-y border-slate-100">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 py-6 border-y border-slate-100 dark:border-white/5">
                         <div>
-                            <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">ISBN</p>
-                            <p class="text-base font-bold text-slate-800 mt-1">{{ $book->isbn }}</p>
+                            <p class="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">ISBN</p>
+                            <p class="text-base font-bold text-slate-800 dark:text-white mt-1">{{ $book->isbn }}</p>
                         </div>
                         @if($book->publisher)
                         <div>
-                            <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Publisher</p>
-                            <p class="text-base font-bold text-slate-800 mt-1">{{ $book->publisher->name }}</p>
+                            <p class="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Publisher</p>
+                            <p class="text-base font-bold text-slate-800 dark:text-white mt-1">{{ $book->publisher->name }}</p>
                         </div>
                         @endif
                         <div>
-                            <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Publication Year</p>
-                            <p class="text-base font-bold text-slate-800 mt-1">{{ $book->publication_year ?? 'N/A' }}</p>
+                            <p class="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Publication Year</p>
+                            <p class="text-base font-bold text-slate-800 dark:text-white mt-1">{{ $book->publication_year ?? 'N/A' }}</p>
                         </div>
                         @if($book->language)
                         <div>
-                            <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Language</p>
-                            <p class="text-base font-bold text-slate-800 mt-1 capitalize">{{ $book->language }}</p>
+                            <p class="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Language</p>
+                            <p class="text-base font-bold text-slate-800 dark:text-white mt-1 capitalize">{{ $book->language }}</p>
                         </div>
                         @endif
                         <div>
-                            <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Pages</p>
-                            <p class="text-base font-bold text-slate-800 mt-1">{{ $book->pages ?? 'N/A' }}</p>
+                            <p class="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Pages</p>
+                            <p class="text-base font-bold text-slate-800 dark:text-white mt-1">{{ $book->pages ?? 'N/A' }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Available Copies</p>
-                            <p class="text-base font-bold text-slate-800 mt-1">{{ $book->available_copies }} of {{ $book->total_copies }}</p>
+                            <p class="text-sm font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Available Copies</p>
+                            <p class="text-base font-bold text-slate-800 dark:text-white mt-1">{{ $book->available_copies }} of {{ $book->total_copies }}</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Action Button -->
-                <div class="mt-10 pt-8 flex items-center justify-between gap-6 border-t border-slate-100">
+                <div class="mt-10 pt-8 flex items-center justify-between gap-6 border-t border-slate-100 dark:border-white/5">
                     <div>
-                        <p class="text-sm font-medium text-slate-500">Want to read this book?</p>
-                        <p class="text-xs text-slate-400 mt-0.5">You can borrow it if copies are available.</p>
+                        <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Want to read this book?</p>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">You can borrow it if copies are available.</p>
                     </div>
 
                     @if($book->available_copies > 0)
@@ -117,14 +117,14 @@
                                 title: 'Request to Borrow',
                                 message: 'Are you sure you want to request to borrow this book?',
                                 buttonText: 'Request to Borrow',
-                                buttonClass: 'bg-slate-900 hover:bg-slate-800 focus:ring-slate-900 shadow-slate-900/20',
+                                buttonClass: 'bg-accent-600 hover:bg-accent-700 focus:ring-accent-500 shadow-accent-600/20',
                                 iconType: 'info'
-                            })" class="w-full sm:w-auto justify-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all shadow-lg shadow-slate-900/20 active:scale-95 flex items-center gap-2 group">
+                            })" class="w-full sm:w-auto justify-center px-8 py-4 bg-slate-900 dark:bg-accent-600 hover:bg-slate-800 dark:hover:bg-accent-700 text-white font-semibold rounded-2xl transition-all shadow-lg shadow-slate-900/20 dark:shadow-accent-600/20 active:scale-95 flex items-center gap-2 group btn-ripple">
                             <svg class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             Request to Borrow
                         </button>
                     @else
-                        <button disabled class="w-full sm:w-auto justify-center px-8 py-4 bg-slate-100 text-slate-400 font-semibold rounded-2xl cursor-not-allowed flex items-center gap-2">
+                        <button disabled class="w-full sm:w-auto justify-center px-8 py-4 bg-slate-100 dark:bg-white/5 text-slate-400 dark:text-slate-500 font-semibold rounded-2xl cursor-not-allowed flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                             Currently Unavailable
                         </button>
@@ -139,8 +139,8 @@
     @if($similarBooks->isNotEmpty())
     <div>
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                <svg class="w-6 h-6 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2 font-display">
+                <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                 You May Also Like
             </h2>
         </div>
@@ -148,11 +148,11 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             @foreach($similarBooks as $similar)
                 <a href="{{ route('user.books.show', $similar) }}" class="group flex flex-col h-full cursor-pointer">
-                    <div class="w-full aspect-[2/3] bg-slate-100 rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg group-hover:shadow-violet-500/10 transition-all duration-300 relative border border-slate-100 group-hover:border-violet-200 group-hover:-translate-y-1">
+                    <div class="w-full aspect-[2/3] bg-slate-100 dark:bg-white/5 rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg group-hover:shadow-accent-500/10 transition-all duration-300 relative border border-slate-100 dark:border-white/5 group-hover:border-accent-200 dark:group-hover:border-accent-500/20 card-lift">
                         @if($similar->cover_image)
                             <img src="{{ Storage::url($similar->cover_image) }}" alt="{{ $similar->title }}" class="w-full h-full object-cover">
                         @else
-                            <div class="w-full h-full flex flex-col items-center justify-center text-slate-300 bg-slate-50">
+                            <div class="w-full h-full flex flex-col items-center justify-center text-slate-300 dark:text-slate-600 bg-slate-50 dark:bg-white/[0.02]">
                                 <svg class="w-8 h-8 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                             </div>
                         @endif
@@ -161,10 +161,10 @@
                         </div>
                     </div>
                     <div class="mt-3 flex-1 flex flex-col">
-                        <h4 class="text-sm font-bold text-slate-800 line-clamp-2 leading-tight group-hover:text-violet-700 transition-colors">{{ $similar->title }}</h4>
-                        <p class="text-xs text-slate-500 mt-1 line-clamp-1">{{ $similar->author->name ?? 'Unknown' }}</p>
+                        <h4 class="text-sm font-bold text-slate-800 dark:text-white line-clamp-2 leading-tight group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">{{ $similar->title }}</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">{{ $similar->author->name ?? 'Unknown' }}</p>
                         @if($similar->category)
-                            <p class="text-[10px] font-medium text-emerald-600 bg-emerald-50 rounded-full px-2 py-0.5 mt-2 inline-block w-fit">{{ $similar->category->name }}</p>
+                            <p class="text-[10px] font-medium text-accent-600 dark:text-accent-400 bg-accent-50 dark:bg-accent-500/10 rounded-full px-2 py-0.5 mt-2 inline-block w-fit">{{ $similar->category->name }}</p>
                         @endif
                     </div>
                 </a>
